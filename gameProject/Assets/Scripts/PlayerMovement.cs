@@ -9,11 +9,13 @@ public class PlayerMovement : MonoBehaviour
  
     int floorMask;
     float camRayLength = 100f;
+    Vector3 turn;
     void Start()
     {
         floorMask = LayerMask.GetMask("Floor");
         rigid = GetComponent<Rigidbody>();
         playerAnimation = GetComponent<PlayerAnimation>();
+        turn = new Vector3(-40, 0, 0);
     }
 
 
@@ -42,8 +44,9 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 playerToMouse = floorHit.point - transform.position;
             playerToMouse.y = 0;
-
+            
             var rotation = Quaternion.LookRotation(playerToMouse);
+             
             rigid.MoveRotation(rotation);
         }
     }
